@@ -1,27 +1,29 @@
-import 'package:http/http.dart';
 import 'package:flutter/material.dart';
 import '../../domain/modelo/vacante.dart';
+import 'crearVacanteEMP.dart';
 
-class PageBusqueda extends StatelessWidget {
-  const PageBusqueda({Key? key}) : super(key: key);
+class ListaPrincipalEmpreador extends StatefulWidget {
+  const ListaPrincipalEmpreador({Key? key}) : super(key: key);
 
   @override
+  State<ListaPrincipalEmpreador> createState() =>
+      _ListaPrincipalEmpreadorState();
+}
+
+class _ListaPrincipalEmpreadorState extends State<ListaPrincipalEmpreador> {
+  final List _vacantes = listaVacantes;
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+      child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: const Text('BUSQUEDA'),
+          title: const Text('INICIO'),
           backgroundColor: Colors.black,
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          child: const Icon(Icons.check),
-          onPressed: () {},
         ),
         body: ListView(
           children: [
-            _barraDeOpciones(),
             Padding(
               padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
               child: Container(
@@ -62,28 +64,40 @@ class PageBusqueda extends StatelessWidget {
                 child: _vacante2(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-              child: Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: const <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.black,
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 8.0,
-                    )
-                  ],
-                  //border: Border.all(color: Colors.black, width: 6.0)
-                ),
-                child: _vacante3(),
-              ),
-            ),
           ],
-        ));
+        ),
+      ),
+    );
+  }
+
+  _eliminarvacantes(context, Vacante vacante) {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: const Text('Eliminar Vacante'),
+              content: Text(
+                  'Desea realmente eliminar la vacante:  ${vacante.titulo}'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      _vacantes.remove(vacante);
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Eliminar',
+                      style: TextStyle(color: Colors.red),
+                    )),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Cancelar',
+                      style: TextStyle(color: Colors.blue),
+                    ))
+              ],
+            ));
   }
 }
 
@@ -129,7 +143,7 @@ Widget _vacante1() {
           ),
           const Padding(
             padding: EdgeInsets.all(15.0),
-            child: Icon(Icons.check_box_outline_blank),
+            child: Icon(Icons.indeterminate_check_box),
           )
         ],
       ),
@@ -178,79 +192,10 @@ Widget _vacante2() {
             ],
           ),
           const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Icon(Icons.check_box_outline_blank),
-          )
+              padding: EdgeInsets.all(15.0),
+              child: Icon(Icons.indeterminate_check_box))
         ],
       ),
     ],
-  );
-}
-
-Widget _vacante3() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Text('Microsoft'),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Text('Ingeniero de Sistemas',
-                    style:
-                        TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold)),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Text('6.000.000'),
-              ),
-              // ignore: unnecessary_const
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  children: const <Widget>[
-                    Icon(
-                      Icons.location_on,
-                      size: 15.0,
-                    ),
-                    Text('Los Angeles, CA'),
-                  ],
-                ),
-              )
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Icon(Icons.check_box_outline_blank),
-          )
-        ],
-      ),
-    ],
-  );
-}
-
-Widget _barraDeOpciones() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
-    child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-      IconButton(
-        iconSize: 25.0,
-        icon: const Icon(Icons.search),
-        onPressed: () {},
-      ),
-      IconButton(
-        iconSize: 25.0,
-        icon: const Icon(Icons.settings_input_composite_sharp),
-        onPressed: () {},
-      )
-    ]),
   );
 }

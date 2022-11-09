@@ -19,23 +19,25 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: Colors.black,
+          title: const Text('NUEVO USUARIO'),
         ),
         body: Column(
           children: [
             _titulo(),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.fromLTRB(50, 50, 50, 20),
               child: TextField(
                 controller: controltipousuario,
                 decoration: InputDecoration(
                     filled: true,
-                    hintText: 'Tipo Usuario',
+                    //hintText: 'Tipo Usuario',
                     labelText: 'Tipo Usuario',
                     icon: const Icon(Icons.person),
                     // suffix: Icon(Icons.access_alarm),
                     suffix: GestureDetector(
-                      child: const Icon(Icons.person),
+                      child: const Icon(Icons.close),
                       onTap: () {
                         controltipousuario.clear();
                       },
@@ -45,12 +47,11 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.fromLTRB(50, 0, 50, 20),
               child: TextField(
                 controller: controlusuario,
                 decoration: InputDecoration(
                     filled: true,
-                    hintText: 'Usuario',
                     labelText: 'Usuario',
                     icon: const Icon(Icons.person),
                     // suffix: Icon(Icons.access_alarm),
@@ -65,12 +66,11 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.fromLTRB(50, 0, 50, 20),
               child: TextField(
                 controller: controlcontrasena,
                 decoration: InputDecoration(
                     filled: true,
-                    hintText: 'Contraseña',
                     labelText: 'Contraseña',
                     icon: const Icon(Icons.lock),
                     // suffix: Icon(Icons.access_alarm),
@@ -85,17 +85,16 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.fromLTRB(50, 0, 50, 20),
               child: TextField(
                 controller: controlcorreoelectronico,
                 decoration: InputDecoration(
                     filled: true,
-                    hintText: 'Correo electronico',
                     labelText: 'Correo electronico',
                     icon: const Icon(Icons.message),
                     // suffix: Icon(Icons.access_alarm),
                     suffix: GestureDetector(
-                      child: const Icon(Icons.message),
+                      child: const Icon(Icons.close),
                       onTap: () {
                         controlcorreoelectronico.clear();
                       },
@@ -104,37 +103,44 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
                     ),
               ),
             ),
-            ElevatedButton(
-              child: const Text(
-                'REGISTRARSE',
-                style: TextStyle(color: Colors.white, fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: RaisedButton(
+                elevation: 10.0,
+                onPressed: () {
+                  if (controltipousuario.text.isNotEmpty &&
+                      controlusuario.text.isNotEmpty &&
+                      controlcontrasena.text.isNotEmpty &&
+                      controlcorreoelectronico.text.isNotEmpty) {
+                    // Agregar a la lista los valores de cada texto
+
+                    listaUsuario.add(Usuario(
+                        tipo_usuario: controltipousuario.text,
+                        usuarioo: controlusuario.text,
+                        contrasena: controlcontrasena.text,
+                        correo_electronico: controlcorreoelectronico.text));
+
+                    // Devuelvo los datos de la lista _usuarioadd
+                    /*
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => ListarUsuario())); //Llamar la Vista
+                    */
+                  }
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0)),
+                highlightElevation: 20.0,
+                color: Colors.black,
+                textColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
+                child: const Text(
+                  'Registrar',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
-
-              //Paso # 3
-              //En el Boton Enviar Datos
-              style: ElevatedButton.styleFrom(primary: Colors.black),
-              onPressed: () {
-                if (controltipousuario.text.isNotEmpty &&
-                    controlusuario.text.isNotEmpty &&
-                    controlcontrasena.text.isNotEmpty &&
-                    controlcorreoelectronico.text.isNotEmpty) {
-                  // Agregar a la lista los valores de cada texto
-
-                  listaUsuario.add(Usuario(
-                      tipo_usuario: controltipousuario.text,
-                      usuarioo: controlusuario.text,
-                      contrasena: controlcontrasena.text,
-                      correo_electronico: controlcorreoelectronico.text));
-
-                  // Devuelvo los datos de la lista _clientesadd
-                  /*
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => ListarUsuario())); //Llamar la Vista
-                  */
-                }
-              },
             ),
           ],
         ));
@@ -149,11 +155,14 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
   }
 
   Widget _titulo() {
-    return const Text(
-      "Registrarse",
-      style: const TextStyle(
-          color: Colors.black, fontSize: 60.0, fontWeight: FontWeight.bold),
-      textAlign: TextAlign.center,
+    return const Padding(
+      padding: EdgeInsets.all(30.0),
+      child: Text(
+        "Registrarse",
+        style: TextStyle(
+            color: Colors.black, fontSize: 50.0, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

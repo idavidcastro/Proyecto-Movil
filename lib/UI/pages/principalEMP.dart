@@ -29,7 +29,7 @@ class _BottomNavigationEMPState extends State<BottomNavigationEMP> {
         unselectedFontSize: 12.0,
         backgroundColor: Colors.black,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.create), label: 'Crear'),
+          BottomNavigationBarItem(icon: Icon(Icons.create), label: 'Nueva'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
           BottomNavigationBarItem(
               icon: Icon(Icons.menu), label: 'Configuración'),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proyectomovil/UI/pages/app.dart';
-
 import '../../domain/modelo/models.dart';
-import 'bienvenidaEMP.dart';
-import 'crear.dart';
+import 'vacantesEMP.dart';
+import 'registrarUsuario.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -16,37 +15,38 @@ class _LoginState extends State<Login> {
   final List<Usuario> _usuario = listaUsuario;
   TextEditingController controllerusuario = TextEditingController();
   TextEditingController controllercontrasena = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(50.0),
-            child: AppBar(
-              backgroundColor: Colors.black,
-            ),
+        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: _nombre(),
           ),
-          body: ListView(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 60.0, vertical: 200),
-              children: <Widget>[
-                const SizedBox(
-                  height: 15.0,
-                ),
-                _nombre(),
-                _userTextField(),
-                const SizedBox(
-                  height: 15,
-                ),
-                _passwordTextField(),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                _bottonlogin(),
-                _bottonlibre(),
-                _bottonRegistrar(),
-                _texto1(),
-              ])),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _userTextField(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _passwordTextField(),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
+            child: _bottonlogin(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _bottonRegistrar(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(60.0),
+            child: _olvido(),
+          )
+        ]),
+      ),
     );
   }
 
@@ -56,11 +56,14 @@ class _LoginState extends State<Login> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
+            cursorColor: Colors.black,
             keyboardType: TextInputType.emailAddress,
             controller: controllerusuario,
             decoration: const InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: 'Usuario',
+              icon: Icon(
+                Icons.person,
+                color: Colors.black,
+              ),
               labelText: 'Usuario',
             ),
             onChanged: (value) {}),
@@ -74,12 +77,15 @@ class _LoginState extends State<Login> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
+            cursorColor: Colors.black,
             keyboardType: TextInputType.emailAddress,
             obscureText: true,
             controller: controllercontrasena,
             decoration: const InputDecoration(
-              icon: Icon(Icons.lock),
-              hintText: 'Contraseña',
+              icon: Icon(
+                Icons.lock,
+                color: Colors.black,
+              ),
               labelText: 'Contraseña',
             ),
             onChanged: (value) {}),
@@ -119,13 +125,6 @@ class _LoginState extends State<Login> {
   }
 }
 
-Widget _bottonlibre() {
-  return RaisedButton(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      onPressed: () {});
-}
-
 Widget _bottonRegistrar() {
   // ignore: prefer_const_constructors
   return StreamBuilder(builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -156,11 +155,13 @@ Widget _nombre() {
   );
 }
 
-Widget _texto1() {
+Widget _olvido() {
   return const Text(
     "¿Olvidaste tu contraseña?",
-    style: const TextStyle(
-        color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold),
+    style: TextStyle(
+        color: Colors.grey,
+        fontSize: 20.0,
+        decoration: TextDecoration.underline),
     textAlign: TextAlign.center,
   );
 }

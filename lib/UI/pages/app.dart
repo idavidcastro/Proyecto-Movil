@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:proyectomovil/UI/pages/bienvenida.dart';
+import 'package:proyectomovil/UI/pages/vacantes.dart';
 import 'package:proyectomovil/UI/pages/config.dart';
 import 'package:proyectomovil/UI/pages/login.dart';
 import 'package:proyectomovil/UI/pages/principal.dart';
+import 'package:proyectomovil/UI/pages/principalEMP.dart';
 import 'package:proyectomovil/UI/pages/routes.dart';
-
-import 'bienvenidaEMP.dart';
+import 'package:http/http.dart' as http;
+import 'vacantesEMP.dart';
+import 'crearVacanteEMP.dart';
 import 'routes2.dart';
 
 class App extends StatelessWidget {
@@ -15,8 +17,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Principal',
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: const Login(),
+        theme: ThemeData(primaryColor: Colors.black),
+        home: const Home2(),
         debugShowCheckedModeBanner: false);
   }
 }
@@ -62,10 +64,10 @@ class Home2 extends StatefulWidget {
 
 class _Home2State extends State<Home2> {
   int index = 1;
-  BottomNavigation? myBNB;
+  BottomNavigationEMP? myBNB;
   @override
   void initState() {
-    myBNB = BottomNavigation(currentIndex: (i) {
+    myBNB = BottomNavigationEMP(currentIndex: (i) {
       setState(() {
         index = i;
       });

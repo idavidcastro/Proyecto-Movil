@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyectomovil/UI/pages/cofigEMP.dart';
 
-import 'bienvenidaEMP.dart';
+import 'vacantesEMP.dart';
 import 'crearVacanteEMP.dart';
 
 class Routes2 extends StatelessWidget {
@@ -11,7 +11,7 @@ class Routes2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> myList = [
-      const ListaPrincipalEmpreador(),
+      const AdicionarVacantes(),
       const ListaPrincipalEmpreador(),
       const PageConfig2()
     ];
