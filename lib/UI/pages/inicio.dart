@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PageInicio extends StatefulWidget {
-  const PageInicio({Key? key}):super(key: key);
+  const PageInicio({Key? key}) : super(key: key);
 
   @override
   State<PageInicio> createState() => _PageInicioState();

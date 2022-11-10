@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proyectomovil/UI/pages/login.dart';
 
+import 'editarConfig.dart';
+
 class PageConfig extends StatefulWidget {
   const PageConfig({Key? key}) : super(key: key);
 
@@ -135,7 +137,13 @@ class _PageConfigState extends State<PageConfig> {
               children: [
                 RaisedButton(
                   elevation: 10.0,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const EditarConfig()),
+                    );
+                    setState(() {});
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)),
                   highlightElevation: 20.0,

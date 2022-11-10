@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:proyectomovil/UI/pages/app.dart';
 import '../../domain/modelo/usuario.dart';
+import 'recuperPsswd.dart';
 import 'vacantesEMP.dart';
 import 'registrarUsuario.dart';
 
@@ -24,6 +25,10 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.black,
+        ),
         body: SingleChildScrollView(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Padding(
@@ -47,8 +52,21 @@ class _LoginState extends State<Login> {
               child: _bottonRegistrar(),
             ),
             Padding(
-              padding: const EdgeInsets.all(60.0),
+              padding: const EdgeInsets.fromLTRB(20, 60, 20, 10),
               child: _olvido(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const RecuperarPsswd()));
+                },
+                icon: const Icon(Icons.email),
+                iconSize: 40.0,
+              ),
             )
           ]),
         ),
@@ -82,7 +100,8 @@ class _LoginState extends State<Login> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: TextField(
+        child: TextFormField(
+            /////AQUI
             cursorColor: Colors.black,
             keyboardType: TextInputType.number,
             obscureText: true,
@@ -107,10 +126,12 @@ class _LoginState extends State<Login> {
         onPressed: () {
           String user = controllerusuario.text;
           String password = controllercontrasena.text;
+          bool validacion = false;
 
           if (user.isNotEmpty && password.isNotEmpty) {
             for (var item in _usuarios) {
               if (item.usuario == user && item.contrasena == password) {
+                validacion = true;
                 if (item.tipo_usuario == 'Empleado') {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => const Home()));
@@ -118,31 +139,30 @@ class _LoginState extends State<Login> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => const Home2()));
                 }
-              } else {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: const Text('Error'),
-                          content:
-                              const Text('Verifique el usuario y contraseña'),
-                          actions: <Widget>[
-                            FlatButton(
-                              child: const Text('Ok'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                        ));
               }
             }
-            ;
+            if (validacion == false) {
+              showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: const Text('Error'),
+                        content: const Text('El usuario no está registrado'),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: const Text('Ok'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      ));
+            }
           } else {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
                       title: const Text('Error'),
-                      content: const Text('Verifique el usuario y contraseña'),
+                      content: const Text('Campos Vacíos'),
                       actions: <Widget>[
                         FlatButton(
                           child: const Text('Ok'),
@@ -251,19 +271,19 @@ Widget _bottonRegistrar() {
 
 Widget _nombre() {
   return const Text(
-    "Iniciar Sesion",
+    "Iniciar Sesión",
     style: const TextStyle(
-        color: Colors.black, fontSize: 60.0, fontWeight: FontWeight.bold),
+        color: Colors.black, fontSize: 50.0, fontWeight: FontWeight.bold),
     textAlign: TextAlign.center,
   );
 }
 
 Widget _olvido() {
   return const Text(
-    "¿Olvidaste tu contraseña?",
+    "¿Olvidaste tu contraseña? \n¡Click aquí abajo!",
     style: TextStyle(
         color: Colors.grey,
-        fontSize: 20.0,
+        fontSize: 17.0,
         decoration: TextDecoration.underline),
     textAlign: TextAlign.center,
   );

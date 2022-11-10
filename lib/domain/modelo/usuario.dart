@@ -14,12 +14,12 @@ class Usuario {
 List<Usuario> listaUsuarios = [
   Usuario(
       tipo_usuario: 'Empleado',
-      usuario: 'Pipe',
-      contrasena: '54321',
+      usuario: 'ivan',
+      contrasena: '1',
       correo_electronico: 'afelipe@gmail.com'),
   Usuario(
       tipo_usuario: 'Empleador',
-      usuario: 'Andres',
-      contrasena: '12345',
+      usuario: 'ivan',
+      contrasena: '2',
       correo_electronico: 'andres21@gmail.com'),
 ];

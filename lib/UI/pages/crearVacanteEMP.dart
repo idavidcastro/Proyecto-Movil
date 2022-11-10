@@ -40,7 +40,7 @@ class _AdicionarVacantesState extends State<AdicionarVacantes> {
                       filled: true,
                       //hintText: 'Tipo Usuario',
                       labelText: 'Empresa',
-                      icon: const Icon(Icons.person),
+                      icon: const Icon(Icons.business),
                       // suffix: Icon(Icons.access_alarm),
                       suffix: GestureDetector(
                         child: const Icon(Icons.close),
@@ -75,10 +75,11 @@ class _AdicionarVacantesState extends State<AdicionarVacantes> {
                 padding: const EdgeInsets.fromLTRB(50, 0, 50, 20),
                 child: TextField(
                   controller: controlSalario,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       filled: true,
                       labelText: 'Salario',
-                      icon: const Icon(Icons.lock),
+                      icon: const Icon(Icons.attach_money),
                       // suffix: Icon(Icons.access_alarm),
                       suffix: GestureDetector(
                         child: const Icon(Icons.close),
@@ -97,7 +98,7 @@ class _AdicionarVacantesState extends State<AdicionarVacantes> {
                   decoration: InputDecoration(
                       filled: true,
                       labelText: 'Ciudad',
-                      icon: const Icon(Icons.message),
+                      icon: const Icon(Icons.location_on),
                       // suffix: Icon(Icons.access_alarm),
                       suffix: GestureDetector(
                         child: const Icon(Icons.close),
@@ -153,6 +154,25 @@ class _AdicionarVacantesState extends State<AdicionarVacantes> {
                           MaterialPageRoute(
                               builder: (_) => ListarUsuario())); //Llamar la Vista
                       */
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                                title: const Text('Error'),
+                                content: const Text('Registre los campos'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        _limpiar();
+                                        setState(() {});
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text(
+                                        'Ok',
+                                        style: TextStyle(color: Colors.black),
+                                      ))
+                                ],
+                              ));
                     }
                   },
                   shape: RoundedRectangleBorder(
@@ -186,7 +206,7 @@ class _AdicionarVacantesState extends State<AdicionarVacantes> {
       child: Text(
         "Nueva Vacante",
         style: TextStyle(
-            color: Colors.black, fontSize: 50.0, fontWeight: FontWeight.bold),
+            color: Colors.black, fontSize: 40.0, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
     );

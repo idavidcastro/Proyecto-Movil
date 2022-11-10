@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'editarConfigEMP.dart';
 import 'login.dart';
 
 class PageConfig2 extends StatefulWidget {
@@ -136,7 +137,14 @@ class _PageConfig2State extends State<PageConfig2> {
               children: [
                 RaisedButton(
                   elevation: 10.0,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const EditarConfigEMP()),
+                    );
+                    setState(() {});
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)),
                   highlightElevation: 20.0,
