@@ -1,6 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:proyectomovil/UI/pages/app.dart';
-import '../../domain/modelo/models.dart';
+import '../../domain/modelo/usuario.dart';
 import 'vacantesEMP.dart';
 import 'registrarUsuario.dart';
 
@@ -12,40 +15,43 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final List<Usuario> _usuario = listaUsuario;
+  final List<Usuario> _usuarios = listaUsuarios;
   TextEditingController controllerusuario = TextEditingController();
   TextEditingController controllercontrasena = TextEditingController();
+  TextEditingController controllertipouser = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: _nombre(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _userTextField(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _passwordTextField(),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
-            child: _bottonlogin(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _bottonRegistrar(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(60.0),
-            child: _olvido(),
-          )
-        ]),
+        body: SingleChildScrollView(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: _nombre(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _userTextField(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _passwordTextField(),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
+              child: _bottonlogin(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _bottonRegistrar(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(60.0),
+              child: _olvido(),
+            )
+          ]),
+        ),
       ),
     );
   }
@@ -78,7 +84,7 @@ class _LoginState extends State<Login> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
             cursorColor: Colors.black,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.number,
             obscureText: true,
             controller: controllercontrasena,
             decoration: const InputDecoration(
@@ -99,21 +105,65 @@ class _LoginState extends State<Login> {
       // ignore: sort_child_properties_last
       child: FlatButton(
         onPressed: () {
-          if (controllerusuario.text == 'empleador') {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const Home2()),
-            );
+          String user = controllerusuario.text;
+          String password = controllercontrasena.text;
+
+          if (user.isNotEmpty && password.isNotEmpty) {
+            for (var item in _usuarios) {
+              if (item.usuario == user && item.contrasena == password) {
+                if (item.tipo_usuario == 'Empleado') {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => const Home()));
+                } else {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const Home2()));
+                }
+              } else {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: const Text('Error'),
+                          content:
+                              const Text('Verifique el usuario y contraseña'),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: const Text('Ok'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            )
+                          ],
+                        ));
+              }
+            }
+            ;
           } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const Home()),
-            );
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                      title: const Text('Error'),
+                      content: const Text('Verifique el usuario y contraseña'),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: const Text('Ok'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    ));
           }
+
+          /*
+          if (encontrarUsuario(context, controllerusuario, controllercontrasena) ==true) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => const Home()));
+          }
+          */
         },
         child: const Text('Iniciar sesion',
             style: TextStyle(color: Colors.white, fontSize: 20)),
-        padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
+        padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -122,6 +172,59 @@ class _LoginState extends State<Login> {
       color: Colors.black,
       onPressed: () {},
     );
+  }
+
+  encontrarUsuario(BuildContext context, TextEditingController controlUser,
+      TextEditingController controlPassword) {
+    String user = controlUser.text;
+    String password = controlPassword.text;
+    String tipo_usuario = controllertipouser.text;
+
+    if (user.isNotEmpty && password.isNotEmpty) {
+      for (var item in _usuarios) {
+        if (item.usuario == user && item.contrasena == password) {
+          if (item.tipo_usuario == 'Empleado') {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => const Home()));
+          } else {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => const Home2()));
+          }
+        } else {
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    title: const Text('Error'),
+                    content: const Text('Verifique el usuario y contraseña'),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: const Text('Ok'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  ));
+        }
+      }
+      ;
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text('Error'),
+                content: const Text('Verifique el usuario y contraseña'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: const Text('Ok'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              ));
+    }
+    return false;
   }
 }
 

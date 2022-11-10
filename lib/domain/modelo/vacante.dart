@@ -1,26 +1,26 @@
 class Vacante {
-  var titulo;
-  var descripcion;
+  var empresa;
+  var cargo;
   var salario;
   var ciudad;
 
-  Vacante({this.titulo, this.descripcion, this.salario, this.ciudad});
+  Vacante({this.empresa, this.cargo, this.salario, this.ciudad});
 }
 
 List<Vacante> listaVacantes = [
   Vacante(
-      titulo: 'Axuliar de enfermería',
-      descripcion: 'Se busca axuliar en enfermería',
-      salario: '1.200.000',
-      ciudad: 'Valledupar'),
+      empresa: 'Apple',
+      cargo: 'Diseñador Gráfico',
+      salario: '3.000.000',
+      ciudad: 'Los Angeles, CA'),
   Vacante(
-      titulo: 'Gerente prestigiosa empresa',
-      descripcion: 'Se busca gerente en enfermería',
-      salario: '2.000.000',
-      ciudad: 'Barranquilla'),
-  Vacante(
-      titulo: 'Ingeniero de sistemas',
-      descripcion: 'Se busca ingeniero de sistemas en enfermería',
+      empresa: 'Grupo Aval',
+      cargo: 'Ingeniero de Sistemas',
       salario: '5.000.000',
-      ciudad: 'Bogotá'),
+      ciudad: 'Valledupar, CO'),
+  Vacante(
+      empresa: 'Movistar',
+      cargo: 'Asesor',
+      salario: '1.500.000',
+      ciudad: 'Bogotá, CO'),
 ];

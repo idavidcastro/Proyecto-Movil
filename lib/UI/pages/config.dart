@@ -148,8 +148,36 @@ class _PageConfigState extends State<PageConfig> {
                 RaisedButton(
                   elevation: 10.0,
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const Login()));
+                    showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                              title: const Text('Cerrar Sesión'),
+                              content: const Text('Desea cerrar sesión?'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => const Login()),
+                                      );
+                                      setState(() {});
+                                      //Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      'Sí',
+                                      style: TextStyle(color: Colors.black),
+                                    )),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      'Cancelar',
+                                      style: TextStyle(color: Colors.red),
+                                    ))
+                              ],
+                            ));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)),

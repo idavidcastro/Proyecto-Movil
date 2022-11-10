@@ -1,6 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
-import '../../domain/modelo/models.dart';
+import '../../domain/modelo/usuario.dart';
+import 'login.dart';
 
 class AdicionarUsuario extends StatefulWidget {
   const AdicionarUsuario({Globalkey});
@@ -114,11 +117,36 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
                       controlcorreoelectronico.text.isNotEmpty) {
                     // Agregar a la lista los valores de cada texto
 
-                    listaUsuario.add(Usuario(
+                    listaUsuarios.add(Usuario(
                         tipo_usuario: controltipousuario.text,
-                        usuarioo: controlusuario.text,
+                        usuario: controlusuario.text,
                         contrasena: controlcontrasena.text,
                         correo_electronico: controlcorreoelectronico.text));
+
+                    // dialogo
+                    showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                              title: const Text('Nuevo Usuario'),
+                              content:
+                                  const Text('Se ha guardado correctamente.'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => const Login()),
+                                      );
+                                      setState(() {});
+                                      //Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      'Ok',
+                                      style: TextStyle(color: Colors.black),
+                                    ))
+                              ],
+                            ));
 
                     // Devuelvo los datos de la lista _usuarioadd
                     /*
