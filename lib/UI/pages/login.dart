@@ -120,9 +120,9 @@ class _LoginState extends State<Login> {
 
   Widget _bottonlogin() {
     // ignore: prefer_const_constructors
-    return RaisedButton(
+    return MaterialButton(
       // ignore: sort_child_properties_last
-      child: FlatButton(
+      child: MaterialButton(
         onPressed: () {
           String user = controllerusuario.text;
           String password = controllercontrasena.text;
@@ -148,7 +148,7 @@ class _LoginState extends State<Login> {
                         title: const Text('Error'),
                         content: const Text('El usuario no está registrado'),
                         actions: <Widget>[
-                          FlatButton(
+                          MaterialButton(
                             child: const Text('Ok'),
                             onPressed: () {
                               Navigator.of(context).pop();
@@ -164,7 +164,7 @@ class _LoginState extends State<Login> {
                       title: const Text('Error'),
                       content: const Text('Campos Vacíos'),
                       actions: <Widget>[
-                        FlatButton(
+                        MaterialButton(
                           child: const Text('Ok'),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -217,7 +217,7 @@ class _LoginState extends State<Login> {
                     title: const Text('Error'),
                     content: const Text('Verifique el usuario y contraseña'),
                     actions: <Widget>[
-                      FlatButton(
+                      MaterialButton(
                         child: const Text('Ok'),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -235,7 +235,7 @@ class _LoginState extends State<Login> {
                 title: const Text('Error'),
                 content: const Text('Verifique el usuario y contraseña'),
                 actions: <Widget>[
-                  FlatButton(
+                  MaterialButton(
                     child: const Text('Ok'),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -251,7 +251,7 @@ class _LoginState extends State<Login> {
 Widget _bottonRegistrar() {
   // ignore: prefer_const_constructors
   return StreamBuilder(builder: (BuildContext context, AsyncSnapshot snapshot) {
-    return RaisedButton(
+    return MaterialButton(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 8.0),
           child: const Text('Registrar',

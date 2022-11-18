@@ -96,7 +96,7 @@ class _EditarConfigEMPState extends State<EditarConfigEMP> {
               ),
               Padding(
                 padding: const EdgeInsets.all(40.0),
-                child: RaisedButton(
+                child: MaterialButton(
                   elevation: 10.0,
                   onPressed: () {
                     // dialogo

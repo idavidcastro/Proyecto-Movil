@@ -135,7 +135,7 @@ class _PageConfigState extends State<PageConfig> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                RaisedButton(
+                MaterialButton(
                   elevation: 10.0,
                   onPressed: () {
                     Navigator.push(
@@ -153,7 +153,7 @@ class _PageConfigState extends State<PageConfig> {
                       horizontal: 20.0, vertical: 20.0),
                   child: const Text('Modificar'),
                 ),
-                RaisedButton(
+                MaterialButton(
                   elevation: 10.0,
                   onPressed: () {
                     showDialog(

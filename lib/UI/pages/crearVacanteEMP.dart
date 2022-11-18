@@ -112,7 +112,7 @@ class _AdicionarVacantesState extends State<AdicionarVacantes> {
               ),
               Padding(
                 padding: const EdgeInsets.all(40.0),
-                child: RaisedButton(
+                child: MaterialButton(
                   elevation: 10.0,
                   onPressed: () {
                     if (controlEmpresa.text.isNotEmpty &&
